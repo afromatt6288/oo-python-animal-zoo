@@ -17,8 +17,8 @@ class Animal:
             print("Animal already exists.")
         else:
             print(f"Welcome {nickname} to {zoo}! You are a(n) {species}, and weigh {weight} lbs. We are glad to have you!")
-            self.nickname = nickname                
-            self.species = species
+            self._nickname = nickname                
+            self._species = species
             self.weight = weight
             self.zoo = zoo
             Animal.add_to_animal_list(self)
@@ -28,7 +28,7 @@ class Animal:
         return self._nickname
     
     def set_animal_nickname(self, nickname):
-        if self.check_animal_nickname(nickname):
+        if self.check_animal_nickname(self.nickname):
             print("Cannot change Animal Nickname!")
         elif type(nickname) is str:
             print(f"Setting Nickname to {nickname}")
@@ -42,7 +42,7 @@ class Animal:
         return self._species
     
     def set_animal_species(self, species):
-        if self.check_animal_species(species):
+        if self.check_animal_nickname(self.nickname):
             print("Cannot change Animal Species!")
         elif type(species) is str:
             print(f"Setting Species to {species}")
@@ -83,12 +83,6 @@ class Animal:
                 return True 
 
     @classmethod
-    def check_animal_species(cls, species):
-        for animal in cls.all:
-            if species == animal.species:
-                return True     
-    
-    @classmethod
     def add_to_animal_list(cls, self):
         cls.all.append(self)
     
@@ -104,4 +98,4 @@ class Animal:
     def show_all_animals(cls):
         for animal in cls.all:
             print("Showing Animal")
-            print(f"{animal.nickname}: {animal.species}: {animal.weight}: {animal:zoo}")
+            print(f"Nickname:{animal.nickname}, Species:{animal.species}, Weight:{animal.weight} lbs, Zoo Location:{animal.zoo}")

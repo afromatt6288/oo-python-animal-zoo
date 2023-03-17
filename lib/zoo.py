@@ -3,10 +3,14 @@
 # SanFranZoo = Zoo("San Fransisco Zoo", "San Fransisco, CA")
 # SanDiegoZoo = Zoo("San Diego Zoo", "San Diego, CA")
 # DenZoo = Zoo("Denver Zoo", "Denver, CO")
+# OtherDenZoo = Zoo("Other Denver Zoo", "Denver,CO")
+
+from lib.animal import Animal
 
 class Zoo:
 
     all = []
+    animals = []
 
     def __init__(self, name, location):
         if self.check_zoo(name):
@@ -55,5 +59,3 @@ class Zoo:
         for zoo in cls.all:
             print("Showing Zoo")
             print(f"{zoo.name}: {zoo.location}")
-    
-    pass
