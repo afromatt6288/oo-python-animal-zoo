@@ -1,24 +1,25 @@
 # from lib.animal import Animal
-# Sample Animals
-# Gertie = Animal("Gertie", "Giraffe", 200, "SanDeigoZoo")
-# Ellie = Animal("Ellie", "Elephant", 500, "DenZoo")
-# William = Animal("William", "Wolf", 80, "SanFranZoo")
-# George = Animal("George", "Gorilla", 320, "SanDiegoZoo")
-# Elijah = Animal("Elijah", "Elephant", 530, "DenZoo")
-# Artie = Animal("Artie", "Aardvark", 20, "SanFranZoo")
 
 class Animal:
 
     all = []
     species_list = []
 
-    def __init__(self, nickname, species, weight, zoo):
+    def __init__(self, nickname, species = "Unknown", weight = 0, zoo = "TBD"):
         if self.check_animal_nickname(nickname):
             print("Animal already exists.")
+        elif type(nickname) is not str:
+            print("Animal Nickname must be a string")
+        elif type(species) is not str:
+            print("Animal Species must be a string")
+        elif type(weight) is not int:
+            print("Animal Weight must be an Integer.")  
+        elif type(zoo) is not str:
+            print("Animal Zoo must be a string")
         else:
             print(f"Welcome {nickname} to {zoo}! You are a(n) {species}, and weigh {weight} lbs. We are glad to have you!")
             self._nickname = nickname                
-            self._species = species
+            self.species = species
             self.weight = weight
             self.zoo = zoo
             Animal.add_to_animal_list(self)
@@ -30,11 +31,9 @@ class Animal:
     def set_animal_nickname(self, nickname):
         if self.check_animal_nickname(self.nickname):
             print("Cannot change Animal Nickname!")
-        elif type(nickname) is str:
+        else:
             print(f"Setting Nickname to {nickname}")
             self._nickname = nickname
-        else:
-            print("Animal Nickname must be a string")
     
     nickname = property(get_animal_nickname, set_animal_nickname)
 
@@ -44,11 +43,9 @@ class Animal:
     def set_animal_species(self, species):
         if self.check_animal_nickname(self.nickname):
             print("Cannot change Animal Species!")
-        elif type(species) is str:
+        else:
             print(f"Setting Species to {species}")
             self._species = species
-        else:
-            print("Animal Species must be a string")
     
     species = property(get_animal_species, set_animal_species)
 
@@ -56,11 +53,11 @@ class Animal:
         return self._weight
     
     def set_animal_weight(self, weight):
-        if type(weight) is int:
+        if type(weight) is not int:
+            print("Animal Weight must be an Integer.")   
+        else:
             print(f"Setting Weight to {weight}")
             self._weight = weight
-        else:
-            print("Animal Weight must be an Integer.")   
     
     weight = property(get_animal_weight, set_animal_weight)
 
@@ -68,11 +65,11 @@ class Animal:
         return self._zoo
     
     def set_animal_zoo(self, zoo):
-        if type(zoo) is str:
+        if type(zoo) is not str:
+            print("Animal Zoo must be a string")
+        else:
             print(f"Setting Zoo to {zoo}")
             self._zoo = zoo
-        else:
-            print("Animal Zoo must be a string")
     
     zoo = property(get_animal_zoo, set_animal_zoo)
     
@@ -99,3 +96,15 @@ class Animal:
         for animal in cls.all:
             print("Showing Animal")
             print(f"Nickname:{animal.nickname}, Species:{animal.species}, Weight:{animal.weight} lbs, Zoo Location:{animal.zoo}")
+
+
+
+# Sample Animals
+# gertie = Animal("Gertie", "Giraffe", 200, "San Deigo Zoo")
+# ellie = Animal("Ellie", "Elephant", 500, "Denver Zoo")
+# william = Animal("William", "Wolf", 80, "San Fransisco Zoo")
+# george = Animal("George", "Gorilla", 320, "San Diego Zoo")
+# elijah = Animal("Elijah", "Elephant", 530, "Denver Zoo")
+# artie = Animal("Artie", "Aardvark", 20, "San Fransisco Zoo")
+# peppe = Animal("Peppe", "Penguin", 9, "Other DenverZoo")
+# larry = Animal("Larry", "Lemur", 6, "Bob Villa Zoo")
