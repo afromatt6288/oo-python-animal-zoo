@@ -3,7 +3,7 @@
 class Animal:
 
     all = []
-    species_list = []
+    animal_species = []
 
     def __init__(self, nickname, species = "Unknown", weight = 0, zoo = "TBD"):
         if self.check_animal_nickname(nickname):
@@ -85,26 +85,42 @@ class Animal:
     
     @classmethod
     def update_species_list(cls, species):
-        if species in cls.species_list:
+        if species in cls.animal_species:
             print(f"{species} already listed.")
         else:
             print(f"New Species ({species}) Found!")
-            cls.species_list.append(species) 
+            cls.animal_species.append(species) 
+    
+    # @classmethod
+    # def animal_species(cls):
+    #     return animal_species
+
+    
+    @classmethod
+    def find_by_species(cls, species):
+        animal_species = []
+        for animal in cls.all:
+            if species == animal.species:
+                animal_species.append(animal)
+        for animal in animal_species:
+            print(f"Nickname:{animal.nickname}, Species:{animal.species}, Weight:{animal.weight} lbs, Zoo Location:{animal.zoo}")
+        return animal_species
     
     @classmethod
     def show_all_animals(cls):
+        print("Showing All Animals")
         for animal in cls.all:
-            print("Showing Animal")
             print(f"Nickname:{animal.nickname}, Species:{animal.species}, Weight:{animal.weight} lbs, Zoo Location:{animal.zoo}")
+        return cls.all
 
 
 
 # Sample Animals
-# gertie = Animal("Gertie", "Giraffe", 200, "San Deigo Zoo")
-# ellie = Animal("Ellie", "Elephant", 500, "Denver Zoo")
-# william = Animal("William", "Wolf", 80, "San Fransisco Zoo")
-# george = Animal("George", "Gorilla", 320, "San Diego Zoo")
-# elijah = Animal("Elijah", "Elephant", 530, "Denver Zoo")
-# artie = Animal("Artie", "Aardvark", 20, "San Fransisco Zoo")
-# peppe = Animal("Peppe", "Penguin", 9, "Other DenverZoo")
-# larry = Animal("Larry", "Lemur", 6, "Bob Villa Zoo")
+gertie = Animal("Gertie", "Giraffe", 200, "San Diego Zoo")
+ellie = Animal("Ellie", "Elephant", 500, "Denver Zoo")
+william = Animal("William", "Wolf", 80, "San Fransisco Zoo")
+george = Animal("George", "Gorilla", 320, "San Diego Zoo")
+elijah = Animal("Elijah", "Elephant", 530, "Denver Zoo")
+artie = Animal("Artie", "Aardvark", 20, "San Fransisco Zoo")
+peppe = Animal("Peppe", "Penguin", 9, "Other Denver Zoo")
+larry = Animal("Larry", "Lemur", 6, "Bob Villa Zoo")
